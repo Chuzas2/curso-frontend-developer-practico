@@ -6,15 +6,20 @@ const carrito = document.querySelector('.navbar-shopping-cart');
 const shoppingCard = document.querySelector('.product-detail');
 const cardsContainer = document.querySelector('.cards-container')
 const detailCard = document.querySelector('.product-detail-card');
+const productDetailClose = document.querySelector('.product-detail-close');
+
 
 
 menuEmail.addEventListener('click' , toggleMenuDesktop)
 burgerMenu.addEventListener('click', toggleMenuMovil)
 carrito.addEventListener('click', toggleCarrito)
+productDetailClose.addEventListener('click', closeDetailCard)
+
+
 
 function toggleMenuDesktop(){
     const isAsideClosed = shoppingCard.classList.contains('inactive')
-    
+    detailCard.classList.add('inactive')
     if(!isAsideClosed){
         shoppingCard.classList.add('inactive')
     }
@@ -23,14 +28,15 @@ function toggleMenuDesktop(){
 }
 
 function toggleMenuMovil(){
-
-
+    detailCard.classList.add('inactive')
+    shoppingCard.classList.add('inactive')
     menuMovil.classList.toggle('inactive')
 }
 
 function toggleCarrito(){
     const isMenuDesktopClosed= desktopEmail.classList.contains('inactive')
     const isMobileMenuClosed = desktopEmail.classList.contains('inactive')
+    const isDetailCardClosed = detailCard.classList.contains('inactive')
 
     if(!isMobileMenuClosed){
         menuMovil.classList.add('inactive')
@@ -39,11 +45,26 @@ function toggleCarrito(){
     if(!isMenuDesktopClosed){
         desktopEmail.classList.add('inactive')
     }
-
+    
+    if(!isDetailCardClosed){
+        detailCard.classList.add('inactive')
+    }
+    
     shoppingCard.classList.toggle('inactive')
 }
 
+function openDetailCard(){
+    const isAsideClosed = shoppingCard.classList.contains('inactive')
+    desktopEmail.classList.add('inactive')
+    if(!isAsideClosed){
+        shoppingCard.classList.add('inactive')
+    }
+    detailCard.classList.remove('inactive')
+}
 
+function closeDetailCard(){
+    detailCard.classList.add('inactive')
+}
 
 
 
@@ -86,8 +107,8 @@ function renderProduct(arr){
         
         const productImg = document.createElement('img');
         productImg.setAttribute('src', product.image)
-    
-    
+        productImg.addEventListener('click', openDetailCard)
+       
         const productInfo = document.createElement('div');
         productInfo.classList.add('product-info');
     
