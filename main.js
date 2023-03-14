@@ -7,6 +7,7 @@ const shoppingCard = document.querySelector('.product-detail');
 const cardsContainer = document.querySelector('.cards-container')
 const detailCard = document.querySelector('.product-detail-card');
 const productDetailClose = document.querySelector('.product-detail-close');
+const darken = document.querySelector('.darken');
 
 
 
@@ -16,15 +17,21 @@ carrito.addEventListener('click', toggleCarrito)
 productDetailClose.addEventListener('click', closeDetailCard)
 
 
-
 function toggleMenuDesktop(){
     const isAsideClosed = shoppingCard.classList.contains('inactive')
-    detailCard.classList.add('inactive')
-    if(!isAsideClosed){
+    const isMenuOpen = desktopEmail.classList.contains('inactive')
+     if(!isAsideClosed){
         shoppingCard.classList.add('inactive')
     }
+
+    if(isMenuOpen){
+        darken.classList.remove('inactive')
+    }else{
+        darken.classList.add('inactive')
+
+    }
+    desktopEmail.classList.toggle('inactive')   
     
-    desktopEmail.classList.toggle('inactive')
 }
 
 function toggleMenuMovil(){
@@ -37,11 +44,12 @@ function toggleCarrito(){
     const isMenuDesktopClosed= desktopEmail.classList.contains('inactive')
     const isMobileMenuClosed = desktopEmail.classList.contains('inactive')
     const isDetailCardClosed = detailCard.classList.contains('inactive')
-
+    const isShoppinCardOpen = shoppingCard.classList.contains('inactive')
+    
     if(!isMobileMenuClosed){
         menuMovil.classList.add('inactive')
     }
-
+    
     if(!isMenuDesktopClosed){
         desktopEmail.classList.add('inactive')
     }
@@ -50,20 +58,39 @@ function toggleCarrito(){
         detailCard.classList.add('inactive')
     }
     
+    if(!isShoppinCardOpen){
+        darken.classList.add('inactive')
+    }else{
+        darken.classList.remove('inactive')
+    }
+    
+    
     shoppingCard.classList.toggle('inactive')
 }
 
 function openDetailCard(){
     const isAsideClosed = shoppingCard.classList.contains('inactive')
+    const isOpendetailCard = detailCard.classList.contains('inactive')
+    
     desktopEmail.classList.add('inactive')
     if(!isAsideClosed){
         shoppingCard.classList.add('inactive')
     }
+    
+    if(!isOpendetailCard){
+        darken.classList.add('inactive')
+
+    }else{
+        darken.classList.remove('inactive')
+    }
+
     detailCard.classList.remove('inactive')
+    
 }
 
 function closeDetailCard(){
     detailCard.classList.add('inactive')
+    darken.classList.add('inactive')
 }
 
 
